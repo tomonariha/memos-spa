@@ -1,24 +1,18 @@
 <template>
-  <div id="app">
+  <div id='app'>
     <h1>Memo</h1>
   </div>
-  <div id="index">
-    <memoIndex></memoIndex>
+  <div id='memos'>
+    <memo-index></memo-index>
   </div>
 </template>
 
 <script>
-import memoIndex from './components/memoIndex.vue'
+import MemoIndex from './components/MemoIndex.vue'
 
 export default {
-  data() {
-   
-  },
   components: {
-    memoIndex
-  },
-  methods: {
-
+    MemoIndex
   }
 }
 </script>
@@ -32,9 +26,9 @@ export default {
   color: #2c3e50;
   margin-top: 20px;
 }
-#index {
+#memos {
   width: 400px;
-  height: auto;
+  height: 350px;
   outline: 1px solid green;
 }
 </style>

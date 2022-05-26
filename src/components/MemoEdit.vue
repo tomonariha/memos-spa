@@ -1,14 +1,13 @@
 <template>
-  <div class="memo">
-    <textarea v-model="editingMemo"></textarea>
-    <button v-on:click="editMemo">編集</button>
-    <button v-on:click="deleteMemo">削除</button>
+  <div class='memo'>
+    <textarea v-model='editingMemo'></textarea>
+    <button v-on:click='editMemo'>編集</button>
+    <button v-on:click='deleteMemo'>削除</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'editMemo',
   data () {
     return {
       editingMemo: ''
@@ -17,8 +16,8 @@ export default {
   watch: {
     memo: {
       immediate: true,
-      handler() {
-        this.editingMemo = this.memo.content
+      handler(memo) {
+        this.editingMemo = memo.content
       }
     }
   },

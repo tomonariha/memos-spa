@@ -1,17 +1,27 @@
 <template>
-  <div id="memo-index">
-    <ul v-for="memo in memos" v-bind:key="memo.id"> 
-      <li><a v-on:click='this.memo = memo'>{{ memo.title }}</a></li>
+  <div id='index'>
+    <ul 
+      v-for='memo in memos'
+      v-bind:key='memo.id'
+    > 
+      <li><a v-on:click='showMemo(memo)'>{{ memo.title }}</a></li>
     </ul>
-    <button v-on:click="addMemo()">+</button>
+    <button v-on:click='addMemo()'>+</button>
   </div>
-  <div id="edit">
-    <edit-memo :memo="memo" v-on:edit="editMemos" v-on:delete="destroyMemo"></edit-memo>
+  <div id='edit'>
+    <memo-edit 
+      v-show='show'
+      v-bind:memo='memo'
+      v-on:edit='editMemo'
+      v-on:delete='deleteMemo'
+    >
+    </memo-edit>
   </div>
 </template>
 
 <script>
-import editMemo from './editMemo.vue'
+import MemoEdit from './MemoEdit.vue'
+
 export default {
   data () {
     return {
@@ -19,19 +29,21 @@ export default {
       memo: {},
       content: '',
       storageKey: 'memo-storage-key',
-      id: 0
+      id: 0,
+      show: false
     }
   },
   created () {
     this.memos = this.fetch()
   },
   components: {
-    editMemo
-  },
-  props: {
-    
+    MemoEdit
   },
   methods: {
+    showMemo: function (memo) {
+      this.memo = memo
+      this.show = true
+    },
     addMemo: function () {
       this.memo = {id: this.id,
         title: '新しいメモ',
@@ -41,7 +53,7 @@ export default {
       this.memos.push(this.memo)
       this.save(this.memos)
     },
-    editMemos: function (e) {
+    editMemo: function (e) {
       this.memo.content = e
       if (this.memo.content.includes('\n')) {
         this.memo.title = this.memo.content.slice(0, this.memo.content.indexOf('\n'))
@@ -50,11 +62,11 @@ export default {
       }
       this.save(this.memos)
     },
-    destroyMemo: function () {
+    deleteMemo: function () {
       const index = this.memos.indexOf(this.memo)
       this.memos.splice(index, 1)
       this.save(this.memos)
-      this.memo = ''
+      this.show = false
     },
     fetch: function() {
       const memos = JSON.parse(
@@ -69,9 +81,6 @@ export default {
     save: function(memos) {
       localStorage.setItem(this.storageKey, JSON.stringify(memos))
     }
-  },
-  computed: {
-   
   }
 }
 </script>
@@ -90,18 +99,19 @@ a {
   text-decoration: underline;
   cursor: pointer;
 }
-#memo-index {
+#index {
   vertical-align: top;
-  outline: 1px solid red;
-  height: auto;
+  outline: 1px solid green;
+  height: 350px;
   width: 30%;
   text-align: left;
   display: inline-block;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 #edit {
-  height: auto;
-  width: 69%;
-  outline: 1px solid blue;
+  height: 350px;
+  width: 70%;
   text-align: center;
   display: inline-block;
 }
