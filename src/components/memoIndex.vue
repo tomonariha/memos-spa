@@ -27,9 +27,9 @@ export default {
     return {
       memos: [],
       memo: {},
+      id: 0,
       content: '',
       storageKey: 'memo-storage-key',
-      id: 0,
       show: false
     }
   },
@@ -45,7 +45,8 @@ export default {
       this.show = true
     },
     addMemo: function () {
-      this.memo = {id: this.id,
+      this.memo = {
+        id: this.id,
         title: '新しいメモ',
         content: 'メモの内容を入力してください'
       }
