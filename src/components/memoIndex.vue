@@ -9,13 +9,13 @@
     <button @click='addMemo()'>+</button>
   </div>
   <div id='edit'>
-    <memo-edit 
+    <MemoEdit 
       v-show='show'
       :memo='memo'
       @edit='editMemo'
       @delete='deleteMemo'
     >
-    </memo-edit>
+    </MemoEdit>
   </div>
 </template>
 

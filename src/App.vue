@@ -3,7 +3,7 @@
     <h1>Memo</h1>
   </div>
   <div id='memos'>
-    <memo-index></memo-index>
+    <MemoIndex></MemoIndex>
   </div>
 </template>
 
