@@ -1,8 +1,8 @@
 <template>
   <div class='memo'>
     <textarea v-model='editingMemo'></textarea>
-    <button v-on:click='editMemo'>編集</button>
-    <button v-on:click='deleteMemo'>削除</button>
+    <button @click='editMemo'>編集</button>
+    <button @click='deleteMemo'>削除</button>
   </div>
 </template>
 

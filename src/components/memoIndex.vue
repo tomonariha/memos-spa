@@ -2,18 +2,18 @@
   <div id='index'>
     <ul 
       v-for='memo in memos'
-      v-bind:key='memo.id'
+      :key='memo.id'
     > 
       <li><a v-on:click='showMemo(memo)'>{{ memo.title }}</a></li>
     </ul>
-    <button v-on:click='addMemo()'>+</button>
+    <button @click='addMemo()'>+</button>
   </div>
   <div id='edit'>
     <memo-edit 
       v-show='show'
-      v-bind:memo='memo'
-      v-on:edit='editMemo'
-      v-on:delete='deleteMemo'
+      :memo='memo'
+      @edit='editMemo'
+      @delete='deleteMemo'
     >
     </memo-edit>
   </div>
