@@ -10,7 +10,7 @@
   </div>
   <div id='edit'>
     <MemoEdit 
-      v-show='show'
+      v-show='isEmpty(memo)'
       :memo='memo'
       @edit='editMemo'
       @delete='deleteMemo'
@@ -29,8 +29,7 @@ export default {
       memo: {},
       id: 0,
       content: '',
-      storageKey: 'memo-storage-key',
-      show: false
+      storageKey: 'memo-storage-key'
     }
   },
   created () {
@@ -42,7 +41,6 @@ export default {
   methods: {
     showMemo: function (memo) {
       this.memo = memo
-      this.show = true
     },
     addMemo: function () {
       this.memo = {
@@ -67,7 +65,7 @@ export default {
       const index = this.memos.indexOf(this.memo)
       this.memos.splice(index, 1)
       this.save(this.memos)
-      this.show = false
+      this.memo = {}
     },
     fetch: function() {
       const memos = JSON.parse(
@@ -81,6 +79,9 @@ export default {
     },
     save: function(memos) {
       localStorage.setItem(this.storageKey, JSON.stringify(memos))
+    },
+    isEmpty: function(object){
+      return Object.keys(object).length
     }
   }
 }
